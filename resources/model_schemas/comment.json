@@ -1,0 +1,46 @@
+[
+    {
+        "name": "id",
+        "dbType": "id",
+        "htmlType": "text",
+        "primary": true
+    },
+    {
+        "name": "content",
+        "dbType": "text",
+        "htmlType": "textarea",
+        "validations": "required",
+        "fillable": true
+    },
+    {
+        "name": "status",
+        "dbType": "integer",
+        "htmlType": "text",
+        "fillable": true
+    },
+    {
+        "name": "userId",
+        "dbType": "bigInteger:unsigned:foreign,users,id",
+        "htmlType": "select"
+    },
+    {
+        "name": "storyId",
+        "dbType": "bigInteger:unsigned:foreign,stories,id",
+        "htmlType": "select"
+    },
+    {
+        "name": "chapterId",
+        "dbType": "bigInteger:unsigned:foreign,chapters,id",
+        "htmlType": "select"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "text"
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "text"
+    }
+]

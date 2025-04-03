@@ -1,0 +1,19 @@
+<!-- JavaScript Files -->
+<script src="{{ asset('resources/js/jquery.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/popper.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/bootstrap.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/jquery.appear.js') }}" defer></script>
+<script src="{{ asset('resources/js/countdown.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/waypoints.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/jquery.counterup.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/wow.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/apexcharts.js') }}" defer></script>
+<script src="{{ asset('resources/js/lottie.js') }}" defer></script>
+<script src="{{ asset('resources/js/slick.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/select2.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/owl.carousel.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/jquery.magnific-popup.min.js') }}" defer></script>
+<script src="{{ asset('resources/js/smooth-scrollbar.js') }}" defer></script>
+<script src="{{ asset('resources/js/style-customizer.js') }}" defer></script>
+<script src="{{ asset('resources/js/chart-custom.js') }}" defer></script>
+<script src="{{ asset('resources/js/custom.js') }}" defer></script>
