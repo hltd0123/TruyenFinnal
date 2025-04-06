@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/story/{id}', [HomeController::class, 'showDetails'])->name('story.details');
+Route::post('/story/{id}/review', [HomeController::class, 'storeReview'])->name('story.review');
 
 Route::resource('authors', App\Http\Controllers\AuthorController::class);
 Route::resource('categories', App\Http\Controllers\CategoryController::class);

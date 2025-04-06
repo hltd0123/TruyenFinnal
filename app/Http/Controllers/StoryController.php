@@ -54,6 +54,20 @@ class StoryController extends AppBaseController
     {
         $input = $request->all();
 
+        // Kiểm tra xem có file ảnh hay không
+        if ($request->hasFile('coverImage')) {
+            // Lấy file ảnh từ yêu cầu
+            $file = $request->file('coverImage');
+
+            // Tạo tên file duy nhất (thường sử dụng timestamp hoặc UUID để tránh trùng lặp)
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+
+            // Lưu file vào thư mục storage/app/public/images
+            $path = $file->storeAs('public/images', $filename);
+            // Lưu đường dẫn ảnh vào input
+            $input['coverImage'] = $path;
+        }
+
         $story = $this->storyRepository->create($input);
 
         Flash::success('Story saved successfully.');
@@ -104,6 +118,7 @@ class StoryController extends AppBaseController
     public function update($id, UpdateStoryRequest $request)
     {
         $story = $this->storyRepository->find($id);
+        $input = $request->all();
 
         if (empty($story)) {
             Flash::error('Story not found');
@@ -111,7 +126,21 @@ class StoryController extends AppBaseController
             return redirect(route('stories.index'));
         }
 
-        $story = $this->storyRepository->update($request->all(), $id);
+        // Kiểm tra xem có file ảnh hay không
+        if ($request->hasFile('coverImage')) {
+            // Lấy file ảnh từ yêu cầu
+            $file = $request->file('coverImage');
+
+            // Tạo tên file duy nhất (thường sử dụng timestamp hoặc UUID để tránh trùng lặp)
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+
+            // Lưu file vào thư mục storage/app/public/images
+            $path = $file->storeAs('storage/images', $filename);
+            // Lưu đường dẫn ảnh vào input
+            $input['coverImage'] = $path;
+        }
+
+        $story = $this->storyRepository->update($input, $id);
 
         Flash::success('Story updated successfully.');
 

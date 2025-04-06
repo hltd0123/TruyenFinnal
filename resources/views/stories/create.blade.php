@@ -34,7 +34,7 @@
                                 @include('adminlte-templates::common.errors')
 
                                 {{-- Form tạo story --}}
-                                {!! Form::open(['route' => 'stories.store']) !!}
+                                {!! Form::open(['route' => 'stories.store', 'enctype' => 'multipart/form-data']) !!}
 
                                     <div class="row">
                                         @include('stories.fields')

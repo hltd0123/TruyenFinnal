@@ -38,7 +38,7 @@
                                 @include('adminlte-templates::common.errors')
 
                                 {{-- Form update story --}}
-                                {!! Form::model($story, ['route' => ['stories.update', $story->id], 'method' => 'patch']) !!}
+                                {!! Form::model($story, ['route' => ['stories.update', $story->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
 
                                     <div class="row">
                                         @include('stories.fields')

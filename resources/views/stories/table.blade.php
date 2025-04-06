@@ -10,6 +10,7 @@
                     <th style="width: 15%;">Trạng thái</th>
                     <th style="width: 15%;">Tác giả</th>
                     <th style="width: 15%;">Danh mục</th>
+                    <th style="width: 15%;">Đường dẫn ảnh</th>
                     <th style="width: 20%;">Hành động</th>
                 </tr>
             </thead>
@@ -24,8 +25,9 @@
                                 <span class="badge badge-danger">Không hoạt động</span>
                             @endif
                         </td>
-                        <td>{{ $story->authorId }}</td>
-                        <td>{{ $story->categoryId }}</td>
+                        <td>{{ $story->author->name }}</td>
+                        <td>{{ $story->category->name }}</td>
+                        <td>{{ $story->coverImage }}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="{{ route('stories.edit', [$story->id]) }}" class="btn btn-sm btn-warning mr-2">

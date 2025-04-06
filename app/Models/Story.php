@@ -35,6 +35,11 @@ class Story extends Model
         return $this->belongsTo(Author::class, 'authorId');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'categoryId');
+    }
+
     public function chapters()
     {
         return $this->hasMany(Chapter::class, 'storyId');

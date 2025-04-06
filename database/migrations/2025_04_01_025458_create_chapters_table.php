@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->integer('chapterNumber');
             $table->integer('status');
+            $table->foreignId('storyId')->references('id')->on('stories')->onDelete('cascade');
             $table->timestamps();
         });
     }

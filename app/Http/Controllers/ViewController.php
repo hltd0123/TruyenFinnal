@@ -46,7 +46,9 @@ class ViewController extends AppBaseController
      */
     public function create()
     {
-        return view('views.create')->with('layout', $this->layout);
+        return view('views.create')->with('layout', $this->layout)->with('users', User::pluck('name', 'id'))
+            ->with('stories', Story::pluck('title', 'id'))
+            ->with('chapters', Chapter::pluck('chapterTitle', 'id'));
     }
 
     /**

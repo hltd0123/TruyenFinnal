@@ -25,8 +25,16 @@
                             </div>
                             <div class="iq-card-body">
 
-                                {{-- Hiển thị thông báo lỗi --}}
-                                @include('adminlte-templates::common.errors')
+                                {{-- Hiển thị thông báo lỗi tổng quát nếu có --}}
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 {{-- Form tạo tác giả --}}
                                 {!! Form::open(['route' => 'authors.store']) !!}

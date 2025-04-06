@@ -15,12 +15,20 @@
     {!! Form::label('coverImage', 'Coverimage:') !!}
     <div class="input-group">
         <div class="custom-file">
-            {!! Form::file('coverImage', ['class' => 'custom-file-input']) !!}
+            {!! Form::file('coverImage', ['class' => 'custom-file-input'], ['id' => 'coverImage']) !!}
             {!! Form::label('coverImage', 'Choose file', ['class' => 'custom-file-label']) !!}
         </div>
     </div>
 </div>
 <div class="clearfix"></div>
+<script>
+    // Khi người dùng chọn file, cập nhật tên file vào label
+    document.getElementById('coverImage').addEventListener('change', function() {
+        var fileName = this.files[0].name; // Lấy tên file từ input file
+        var label = this.nextElementSibling; // Lấy label kế tiếp
+        label.innerHTML = fileName; // Cập nhật tên file vào label
+    });
+</script>
 
 <!-- Status Field -->
 <div class="form-group col-sm-6">

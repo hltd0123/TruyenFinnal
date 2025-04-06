@@ -12,14 +12,16 @@ class Chapter extends Model
         'chapterTitle',
         'content',
         'chapterNumber',
-        'status'
+        'status',
+        'storyId'
     ];
 
     protected $casts = [
         'chapterTitle' => 'string',
         'content' => 'string',
         'chapterNumber' => 'integer',
-        'status' => 'integer'
+        'status' => 'integer',
+        'storyId' => 'integer'
     ];
 
     public static array $rules = [

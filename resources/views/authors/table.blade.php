@@ -7,7 +7,7 @@
                     <th style="width: 15%;">Author Name</th>
                     <th style="width: 20%;">Email</th>
                     <th style="width: 20%;">Bio</th>
-                    <th style="width: 10%;">User</th>
+                    <th style="width: 10%;">UserId</th>
                     <th style="width: 10%;">Status</th>
                     <th style="width: 15%;">Action</th>
                 </tr>
@@ -17,9 +17,9 @@
                     <tr>
                         <td>{{ $author->id }}</td>
                         <td>{{ $author->name }}</td>
-                        <td>{{ $author->email }}</td>
+                        <td>{{ $author->user->email }}</td>
                         <td>{{ \Illuminate\Support\Str::limit($author->bio, 50) }}</td>
-                        <td>{{ $author->user->name }}</td>
+                        <td>{{ $author->user->id }}</td>
                         <td>
                             @if($author->status == 1)
                                 <span class="badge badge-success">Active</span>

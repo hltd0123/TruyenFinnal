@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\User;
 use App\Repositories\AuthorRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Flash;
 
 class AuthorController extends AppBaseController
@@ -47,13 +48,47 @@ class AuthorController extends AppBaseController
      */
     public function store(CreateAuthorRequest $request)
     {
-        $input = $request->all();
+        // Bắt đầu transaction
+        DB::beginTransaction();
 
-        $author = $this->authorRepository->create($input);
+        try {
+            // Lấy dữ liệu từ form
+            $input = $request->all();
 
-        Flash::success('Author saved successfully.');
+            //Tạo mới user
+            $user = User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => bcrypt($input['password']),
+                'role' => '1',
+            ]);
 
-        return redirect(route('authors.index'));
+            // Lưu User
+            $input['userId'] = $user->id;
+
+            // Tạo mới author
+            $author = $this->authorRepository->create($input);
+
+            // Commit transaction nếu không có lỗi
+            DB::commit();
+
+            // Hiển thị thông báo thành công
+            Flash::success('Author saved successfully.');
+
+            // Redirect về trang danh sách tác giả
+            return redirect(route('authors.index'));
+
+        } catch (\Exception $e) {
+            // Nếu có lỗi xảy ra, rollback transaction
+            DB::rollBack();
+            @dd($e->getMessage());
+
+            // Hiển thị thông báo lỗi
+            Flash::error('Error khi lưu author: ' . $e->getMessage());
+
+            // Quay lại trang trước đó với thông báo lỗi
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -62,6 +97,7 @@ class AuthorController extends AppBaseController
     public function show($id)
     {
         $author = $this->authorRepository->find($id);
+
 
         if (empty($author)) {
             Flash::error('Author not found');
