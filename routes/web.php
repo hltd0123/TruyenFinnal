@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/story/{id}', [HomeController::class, 'showDetails'])->name('story.details');
-Route::post('/story/{id}/review', [HomeController::class, 'storeReview'])->name('story.review');
 Route::get('/story/{storyName}/{chapterNumber}', [HomeController::class, 'showChapter'])->name('story.chapter');
 Route::post('/story/{storyName}/comment/{chapterNumber?}', [HomeController::class, 'storeComment'])->name('comment.save');
 

@@ -48,7 +48,8 @@
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
                         <a href="{{ route('category.show', $story->category->id) }}">Thể loại</a>
                         <a href="#">{{ $story->category->name}}</a>
-                        <span> {{ $story->title}}</span>
+                        <a href="{{ route('story.details', $story->id) }}"> {{ $story->title}}</a>
+                        <span>Đọc</span>
                     </div>
                 </div>
             </div>
@@ -74,9 +75,9 @@
                         <div class="section-title">
                             <h5>Chương truyện</h5>
                         </div>                   
-                        @foreach($story->chapters as $chapter)
-                            <a href="{{ route('story.chapter', ['storyName' => urlencode($story->title), 'chapterNumber' => $chapter->chapterNumber]) }}">
-                                {{$chapter->chapterNumber }} - {{ $chapter->chapterTitle }}
+                        @foreach($story->chapters as $chapterImport)
+                            <a href="{{ route('story.chapter', ['storyName' => urlencode($story->title), 'chapterNumber' => $chapterImport->chapterNumber]) }}">
+                                {{$chapterImport->chapterNumber }} - {{ $chapterImport->chapterTitle }}
                             </a>
                         @endforeach
                     </div>                    
