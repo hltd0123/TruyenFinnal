@@ -5,7 +5,7 @@ use App\Models\Category;
 use App\Models\Chapter;
 use App\Models\Comment;
 use App\Models\Story;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class HomeController extends AppBaseController
 {

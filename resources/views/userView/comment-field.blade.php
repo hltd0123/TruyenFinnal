@@ -21,7 +21,7 @@
                 <h5>Comment</h5>
             </div>
             <form action="{{ route('comment.save', [
-                'storyName' => $story->id, 
+                'storyName' => urlencode($story->title), 
                 'chapterNumber' => isset($chapter) ? $chapter->chapterNumber : null
             ]) }}" method="POST">
             @csrf

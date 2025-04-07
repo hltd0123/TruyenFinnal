@@ -22,7 +22,7 @@ class Comment extends Model
         'status' => 'integer',
         'userId' => 'integer',
         'storyId' => 'integer',
-        'chapterId' => 'integer|null'
+        'chapterId' => 'integer'
     ];
 
     public static array $rules = [
