@@ -10,8 +10,8 @@
     <title>Anime | Template</title>
 
     <!-- Google Font -->
-    <link href="{{ asset('userResources/fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap') }}" rel="stylesheet">
-    <link href="{{ asset('userResources/fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('userResources/css/bootstrap.min.css') }}" type="text/css">
@@ -39,8 +39,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
-                        <h2>Đăng nhập</h2>
-                        <p>Chào mừng đến với trang đăng nhập</p>
+                        <h2>Đăng ký</h2>
+                        <p>Chào mừng đến trang đăng ký</p>
                     </div>
                 </div>
             </div>
@@ -48,40 +48,43 @@
     </section>
     <!-- Normal Breadcrumb End -->
 
-    <!-- Login Section Begin -->
-    <section class="login spad">
+    <!-- Signup Section Begin -->
+    <section class="signup spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="login__form">
-                        <h3>Login</h3>
-                        <form action="{{ route('login.post') }}" method="POST">
+                        <h3>Sign Up</h3>
+                        <form action="{{ route('register.post') }}" method="POST">
                             @csrf
                             <div class="input__item">
                                 <input type="email" name="email" placeholder="Email address" required>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
+                                <input type="text" name="name" placeholder="Your Name" required>
+                                <span class="icon_profile"></span>
+                            </div>
+                            <div class="input__item">
                                 <input type="password" name="password" placeholder="Password" required>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Đăng nhập</button>
+                            <div class="input__item">
+                                <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <button type="submit" class="site-btn">Đăng ký</button>
                         </form>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="login__register">
-                        <h3>Bạn muốn đăng ký?</h3>
-                        <a href="{{ route('register') }}" class="primary-btn">Đăng ký</a>
+                        <h5>Bạn đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập</a></h5>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Login Section End -->
+    <!-- Signup Section End -->
 
     <!-- Đổ Footer vào -->
-    @include('layouts.footer-user') <!-- Thêm footer vào Blade -->
+    @include('layouts.footer-user')
 
     <!-- Js Plugins -->
     <script src="{{ asset('userResources/js/jquery-3.3.1.min.js') }}"></script>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('status');
             $table->bigInteger('userId')->unsigned();
             $table->bigInteger('storyId')->unsigned();
-            $table->bigInteger('chapterId')->unsigned();
+            $table->bigInteger('chapterId')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('userId')->references('id')->on('users');
             $table->foreign('storyId')->references('id')->on('stories');

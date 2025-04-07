@@ -83,7 +83,7 @@
                                             <li>{{ $story->category->name }}</li>
                                             <li>{{ $story->author->name }}</li>
                                         </ul>
-                                        {{-- <h5><a href="{{ route('story.show', $story->id) }}">{{ $story->title }}</a></h5> --}}
+                                        <h5><a href="{{ route('story.details', $story->id) }}">{{ $story->title }}</a></h5>
                                     </div>
                                 </div>
                             </div>

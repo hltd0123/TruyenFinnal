@@ -7,8 +7,8 @@
             <thead>
                 <tr>
                     <th style="width: 5%;">ID</th>
-                    <th style="width: 30%;">Tên chương</th>
-                    <th style="width: 15%;">Số chương</th>
+                    <th style="width: 15%;">Tên chương</th>
+                    <th style="width: 10%;">Số chương</th>
                     <th style="width: 15%;">Trạng thái</th>
                     <th style="width: 20%;">Hành động</th>
                 </tr>

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Chapter;
 use App\Models\Comment;
 use App\Models\Story;
 use Illuminate\Http\Client\Request;
@@ -48,20 +49,52 @@ class HomeController extends AppBaseController
     }
 
     // Lưu bình luận vào cơ sở dữ liệu
-    public function storeComment(Request $request, $id)
+    public function storeComment(Request $request, $storyName, $chapterNumber = null)
     {
         $request->validate([
             'content' => 'required|string|max:500',
         ]);
 
+        $storyName = urldecode($storyName);
+        $chapterIdSave = null;
+
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để bình luận.');
+        }
+
+        // Kiểm tra xem câu chuyện có tồn tại không
+        $story = Story::where('title', $storyName)->firstOrFail();
+        if($chapterNumber != null){
+            $chapter = Chapter::where('storyId', $story->id)->where('chapterNumber', $chapterNumber)->firstOrFail();
+            $chapterIdSave = $chapter->id;
+        }
+
         // Lưu bình luận
-        $story = Story::findOrFail($id);
-        $story->comments()->create([
+        Comment::create([
             'userId' => auth()->id(),
             'content' => $request->input('content'),
-            'status' => 1, // Đặt status là 1, bạn có thể thay đổi theo yêu cầu
+            'storyId' => $story->id,
+            'chapterId' => $chapterIdSave,
+            'status' => 1, // Đặt status là 1
         ]);
 
-        return redirect()->route('story.details', $id);
+        return redirect()->back()->with('success', 'Bình luận của bạn đã được lưu.');
+    }
+    
+    public function showChapter($storyName, $chapterNumber)
+    {
+        $storyName = urldecode($storyName);
+
+        $categoies = Category::all();
+        $story = Story::where('title', $storyName)->firstOrFail();
+        $chapter = Chapter::where('storyId', $story->id)->where('chapterNumber', $chapterNumber)->firstOrFail();
+        $comments = Comment::where('chapterId', $chapter->id)->get();
+
+        return view('userView.chapter-view')
+            ->with('story', $story)
+            ->with('chapter', $chapter)
+            ->with('comments', $comments)
+            ->with('categories', $categoies);
     }
 }

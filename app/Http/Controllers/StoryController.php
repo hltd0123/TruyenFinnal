@@ -65,7 +65,7 @@ class StoryController extends AppBaseController
             // Lưu file vào thư mục storage/app/public/images
             $path = $file->storeAs('public/images', $filename);
             // Lưu đường dẫn ảnh vào input
-            $input['coverImage'] = $path;
+            $input['coverImage'] = 'storage/images/' . $filename;
         }
 
         $story = $this->storyRepository->create($input);
@@ -135,9 +135,10 @@ class StoryController extends AppBaseController
             $filename = time() . '.' . $file->getClientOriginalExtension();
 
             // Lưu file vào thư mục storage/app/public/images
-            $path = $file->storeAs('storage/images', $filename);
+            $file->storeAs('public/images', $filename);
             // Lưu đường dẫn ảnh vào input
-            $input['coverImage'] = $path;
+            $input['coverImage'] = 'storage/images/' . $filename;
+            @dd($input['coverImage']);
         }
 
         $story = $this->storyRepository->update($input, $id);

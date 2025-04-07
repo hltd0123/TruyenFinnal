@@ -42,6 +42,6 @@ class Story extends Model
 
     public function chapters()
     {
-        return $this->hasMany(Chapter::class, 'storyId');
+        return $this->hasMany(Chapter::class, 'storyId')->orderBy('chapterNumber', 'asc');;
     }
 }

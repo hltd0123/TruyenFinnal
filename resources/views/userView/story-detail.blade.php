@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Story Template">
-    <meta name="keywords" content="Story, unica, creative, html">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $story->title }} | Template</title>
+    <title>Anime | Template</title>
 
     <!-- Google Font -->
-    <link href="userResources/fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="userResources/fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('userResources/css/bootstrap.min.css') }}" type="text/css">
@@ -39,9 +39,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="/"><i class="fa fa-home"></i> Trang chủ</a>
-                        <a href="">Thể loại</a>
-                        <span>{{ $story->category->name }}</span> <!-- Tên thể loại của story -->
+                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="{{ route('category.show', $story->category->id) }}">Thể loại</a>
+                        <span>{{ $story->category->name }}</span> <!-- Cập nhật phần này khi dữ liệu có sẵn -->
                     </div>
                 </div>
             </div>
@@ -49,74 +49,46 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Story Section Begin -->
-    <section class="story-details spad">
+    <!-- Anime Section Begin -->
+    <section class="anime-details spad">
         <div class="container">
-            <div class="story__details__content">
+            <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="story__details__pic set-bg" data-setbg="{{ asset( $story->coverImage) }}">
+                        <div class="anime__details__pic set-bg" data-setbg="{{ asset($story->coverImage) }}">
                         </div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="story__details__text">
-                            <div class="story__details__title">
-                                <h3>{{ $story->title }}</h3> <!-- Tên câu chuyện -->
+                        <div class="anime__details__text">
+                            <div class="anime__details__title">
+                                <h3>{{ $story->title }}</h3> 
                             </div>
                             <p>
-                                {{ $story->description }} <!-- Mô tả câu chuyện -->
+                                {{ $story->description }} <!-- Mô tả truyện -->
                             </p>
-                            <div class="story__details__widget">
+                            <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <ul>
-                                            <li><span>Thể loại câu chuyện:</span> {{ $story->category->name }}</li> <!-- Thể loại -->
+                                            <li><span>Thể loại truyện:</span> {{ $story->category->name }}</li> <!-- Thể loại truyện -->
                                             <li><span>Tác giả:</span> {{ $story->author->name }}</li> <!-- Tên tác giả -->
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="story__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Lưu câu chuyện</a>
-                                <a href="" class="watch-btn"><span>Đọc câu chuyện</span> <i
-                                    class="fa fa-angle-right"></i></a>
+                            <div class="anime__details__btn">
+                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Lưu truyện</a>
+                                <a href="{{ route('story.chapter', ['storyName' =>urlencode($story->title), 'chapterNumber' => 1] ) }}" class="watch-btn"><span>Đọc truyện</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-8">
-                        <div class="story__details__review">
-                            <div class="section-title">
-                                <h5>Reviews</h5>
-                            </div>
-                            @foreach ($comments as $comment)
-                                <div class="story__review__item">
-                                    <div class="story__review__item__pic">
-                                        <img src="{{ asset('userResources/img/story/review-1.jpg') }}" alt="">
-                                    </div>
-                                    <div class="story__review__item__text">
-                                        <h6>{{ $comment->user->name }} - <span>{{ $comment->created_at->diffForHumans() }}</span></h6>
-                                        <p>{{ $comment->content }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="story__details__form">
-                            <div class="section-title">
-                                <h5>Your Comment</h5>
-                            </div>
-                            <form action="{{ route('story.review', $story->id) }}" method="POST">
-                                @csrf
-                                <textarea name="content" placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <br><br>
+                
+                @include('userView.comment-field')
             </div>
         </section>
-        <!-- Story Section End -->
+        <!-- Anime Section End -->
 
         <!-- Đổ Footer vào -->
         @include('layouts.footer-user')

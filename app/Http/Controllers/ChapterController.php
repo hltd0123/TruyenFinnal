@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Story;
+use App\Models\User;
 use App\Repositories\ChapterRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -26,10 +28,14 @@ class ChapterController extends AppBaseController
     public function index(Request $request)
     {
         $chapters = $this->chapterRepository->paginate(10);
+        $users = User::pluck('name', 'id');
+        $stories = Story::pluck('title', 'id');
 
         return view('chapters.index')
             ->with('chapters', $chapters)
-            ->with('layout', $this->layout);
+            ->with('layout', $this->layout)
+            ->with('users', $users)
+            ->with('stories', $stories);
     }
 
     /**
@@ -37,7 +43,9 @@ class ChapterController extends AppBaseController
      */
     public function create()
     {
-        return view('chapters.create')->with('layout', $this->layout);
+        $users = User::pluck('name', 'id');
+        $stories = Story::pluck('title', 'id');
+        return view('chapters.create')->with('layout', $this->layout)->with('users', $users)->with('stories', $stories);
     }
 
     /**
@@ -60,6 +68,8 @@ class ChapterController extends AppBaseController
     public function show($id)
     {
         $chapter = $this->chapterRepository->find($id);
+        $users = User::pluck('name', 'id');
+        $stories = Story::pluck('title', 'id');
 
         if (empty($chapter)) {
             Flash::error('Chapter not found');
@@ -67,7 +77,11 @@ class ChapterController extends AppBaseController
             return redirect(route('chapters.index'));
         }
 
-        return view('chapters.show')->with('chapter', $chapter)->with('layout', $this->layout);
+        return view('chapters.show')
+            ->with('chapter', $chapter)
+            ->with('layout', $this->layout)
+            ->with('users', $users)
+            ->with('stories', $stories);
     }
 
     /**
@@ -76,6 +90,8 @@ class ChapterController extends AppBaseController
     public function edit($id)
     {
         $chapter = $this->chapterRepository->find($id);
+        $users = User::pluck('name', 'id');
+        $stories = Story::pluck('title', 'id');
 
         if (empty($chapter)) {
             Flash::error('Chapter not found');
@@ -83,7 +99,11 @@ class ChapterController extends AppBaseController
             return redirect(route('chapters.index'));
         }
 
-        return view('chapters.edit')->with('chapter', $chapter)->with('layout', $this->layout);
+        return view('chapters.edit')
+            ->with('chapter', $chapter)
+            ->with('layout', $this->layout)
+            ->with('users', $users)
+            ->with('stories', $stories);
     }
 
     /**
